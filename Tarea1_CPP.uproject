@@ -20,14 +20,6 @@
 			"TargetAllowList": [
 				"Editor"
 			]
-		},
-		{
-			"Name": "SubsystemBrowserPlugin",
-			"Enabled": true,
-			"TargetAllowList": [
-				"Editor"
-			],
-			"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/f1ba87b348774d338e75d25ddbc46b98"
 		}
 	]
 }

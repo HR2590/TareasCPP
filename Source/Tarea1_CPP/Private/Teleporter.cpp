@@ -29,14 +29,12 @@ void ATeleporter::BeginPlay()
 
 }
 
-// Called every frame
-void ATeleporter::Tick(float DeltaTime)
+void ATeleporter::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
-	Super::Tick(DeltaTime);
-
+	Super::EndPlay(EndPlayReason);
+	BoxCollision->OnComponentBeginOverlap.Clear();
+	BoxCollision->OnComponentEndOverlap.Clear();
 }
-
-
 
 
 void ATeleporter::OnBoxBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor,
@@ -59,8 +57,10 @@ void ATeleporter::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyC
 {
 	Super::PostEditChangeProperty(PropertyChangedEvent);
 
-	FName PropertyName=PropertyChangedEvent.Property->GetFName();
-	if (PropertyName=="TeleportToGo" && TeleportToGo!=this)
+	//const FName PropertyName=PropertyChangedEvent.Property->GetFName();
+	const FName PropertyName=GET_MEMBER_NAME_CHECKED(ThisClass,TeleportToGo);
+	
+	if (PropertyName==PropertyChangedEvent.Property->GetFName() && TeleportToGo!=this && TeleportToGo!=nullptr)
 	{
 		TeleportToGo->TeleportToGo=this;
 		
