@@ -3,83 +3,33 @@
 
 #include "AttributeComponent.h"
 
-
-
 //Constructor
 template<typename  T>
 TUAttribute<T>::TUAttribute(const FName& InName,const T& InValue):AttributeName(InName),Value(InValue){}
 
-
 // Sets default values for this component's properties
-UAttributeComponent::UAttributeComponent()
-{
-
-	PrimaryComponentTick.bCanEverTick = true;
-	ComponentName = "DefaultComponent";
-}
-
-
-// Called when the game starts
-void UAttributeComponent::BeginPlay()
-{
-	Super::BeginPlay();
-}
-
-
-// Called every frame
-void UAttributeComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-}
+UAttributeComponent::UAttributeComponent(){PrimaryComponentTick.bCanEverTick = true;}
 
 //UFunctions
+//Float
 void UAttributeComponent::CreateAttribute_Float(const FName& InName, const float& InInitialValue)
-{
-	CreateAttribute<float>(InName,InInitialValue,FloatAttributes);
-}
-
+{CreateAttribute<float>(InName,InInitialValue,FloatAttributes);}
 void UAttributeComponent::SetAttributeValue_Float(const FName& InName,const float& InValue)
-{
-	SetAttribute<float>(InName,InValue,FloatAttributes);
-}
+{SetAttribute<float>(InName,InValue,FloatAttributes);}
 float UAttributeComponent::GetAttributeValue_Float(const FName& InName) 
-{
-	return GetAttribute<float>(InName,FloatAttributes);
-}
-
-
+{return GetAttribute<float>(InName,FloatAttributes);}
 bool UAttributeComponent::HasAttribute_Float(const FName& InName)
-{
-	return HasAttribute<float>(InName,FloatAttributes);
-}
+{return HasAttribute<float>(InName,FloatAttributes);}
+//Int32
 int32 UAttributeComponent::GetAttributeValue_Int32(const FName& InName)
-{
-	return GetAttribute<int32>(InName,Int32Attributes);
-	
-}
+{return GetAttribute<int32>(InName,Int32Attributes);}
 
-
-//TUAttribute Functions
-template <typename T>
-void TUAttribute<T>::SetValue(const T& InValue)
-{
-	Value=InValue;
-}
-
-template <typename T>
-T TUAttribute<T>::GetValue() const {return Value;}
-
-template <typename T>
-const FName& TUAttribute<T>::GetAttributeName() const
-{
-	return AttributeName;
-}
-
-
-
+//TUAttribute Template Functions
+template <typename T>void TUAttribute<T>::SetValue(const T& InValue){Value=InValue;}
+template <typename T>T TUAttribute<T>::GetValue() const {return Value;}
+template <typename T>const FName& TUAttribute<T>::GetAttributeName() const{return AttributeName;}
 
 //Cpp Functions
-
 template <typename T>
 void UAttributeComponent::SetAttribute(const FName& InName, const T& InValue, TArray<TUAttribute<T>>& OutArray)
 {
@@ -93,7 +43,6 @@ void UAttributeComponent::SetAttribute(const FName& InName, const T& InValue, TA
 			return;
 		}
 	}
-
 }
 
 template <typename T>
